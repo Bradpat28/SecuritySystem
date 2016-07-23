@@ -8,10 +8,9 @@
 def checkuser(username,password):
 	if len(username) < 6 : 
 		return -1
-
 	if len(password) < 6 :
 		return -2 
-	chars = set('!@#$%^&*?,<>'":;+= ') 
+	chars = set("!@#$%^&*?,<>':;+=") 
 	if any((c in chars) for c in username): 
 		return -3 
 	if any((c in chars) for c in password): 
