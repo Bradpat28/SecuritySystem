@@ -1,0 +1,48 @@
+Security System with Raspberry Pi:
+
+Tasks:
+  Camera:
+    ☐ Take video
+    ☐ Take picture while taking video?
+    ☐ Save video
+    ☐ Detect movement
+    ☐ Report movement
+    ☐ Night time security?
+    ☐ Learn what non-movement looks like for any environment
+  Controls:
+    ☐ Turn the Camera on/off
+    ☐ Turn Notifications on/off
+    ☐ Add email/phone to account
+    ☐ Change Password
+    ☐ Change email
+  Data Storage:
+    ☐ How often to clean?
+    ☐ How often to save?
+    ☐ How much memory can be used?
+    ☐ Where do you save the videos?
+    ☐ Make the file system for storing the videos in specified days
+  Notifications:
+    ☐ Send an update to the phone if movement
+    ☐ Send an update to the email if movement
+    ☐ Control the Camera and its features via text messages
+    ☐ Store a record of all the controls made via text
+  UI:
+    ☐ Create account
+    ☐ Set preferences
+    ☐ Front page
+    ☐ Watch live stream of camera
+    ☐ Home Page
+    ☐ News
+    ☐ Delete Account
+    ☐ Watch other stored videos
+  User Authenication:
+    Account Creation:
+      ☐ Func: check if Username/Password are not under 6 characters, and have no special characters.
+      ☐ DB: check that the Username is not taken
+      ☐ DB: Add the account to the DB
+  Test Cases:
+    User Authentication:
+      ☐ Func: Is Username/Password less than 6 characters?
+      ☐ Func: Does the Username/Password have any specific bad characters?
+
+

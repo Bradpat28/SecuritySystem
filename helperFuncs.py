@@ -5,7 +5,7 @@
 # return 1  if successful 
 
 
-def checkuser(username,password):
+def checkUser(username,password):
 	if len(username) < 6 : 
 		return -1
 	if len(password) < 6 :
