@@ -1,11 +1,18 @@
 import helperFuncs
 import textHelperFunc
 
-input_username = "username"
-input_password = "password"
+filesystem = helperFuncs.createFilesystem()
+if helperFuncs.checkFilesystem():
+	if "y" == raw_input("Create Account? (y/n) "):
+		createAccount()
+else:
+	helperFuncs.createAccount()
 
-if helperFuncs.checkUser(input_username, input_password) > 0:
-	print "Successful"
+input_username = raw_input("Username: ")
+input_password = raw_input("Password: ")
+
+
+	
 
 print "1 - Send a Text"
 print "2 - Send an Email"
@@ -18,4 +25,15 @@ if simMovement == 'y':
 		print "Success"
 	else:
 		print "Failure"
+
+
+
+
+
+
+
+
+
+
+
 

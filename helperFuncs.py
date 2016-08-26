@@ -2,6 +2,7 @@
 import textHelperFunc
 import time
 import getpass
+import os
 
 
 # return -1 if username is less than 6 chars
@@ -23,6 +24,15 @@ def checkUser(username,password):
 	
 	return 1
 
+def createAccount():
+	print "Creating Account..."
+	new_username = raw_input("Enter a Username: ")
+	new_password = raw_input("Enter a Password: ")
+	if checkUser(new_username, new_password) > 0:
+		print "Account Creation Successful"
+	else:
+		print "Unable to Create Account"
+		exit()
 
 def simMovement(notification):
 	if int(notification) == 0:
@@ -63,3 +73,43 @@ def simMovement(notification):
 	if retE != 1 or retT != 1:
 		return -4
 	return 1
+
+
+
+def createFilesystem(): 
+	print "Creating FileSystem..."
+	path = os.getcwd() + "/.securesys"
+	if not os.path.exists(path):
+		os.makedirs(path)
+		print "Created File System Directory..."
+	os.chdir(path)
+	if not os.path.exists("filesystem.txt"):
+		print "File does not exist"
+		newfile = open("filesystem.txt", 'w')
+	else:
+		newfile = open("filesystem.txt", 'r+')
+	print "Opened File System File - 'filesystem.txt'..."
+	os.chdir("..")
+	return newfile
+
+def checkFilesystem():
+	path = os.getcwd() + "/.securesys/filesystem.txt"
+	return not (os.stat(path).st_size == 0)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
