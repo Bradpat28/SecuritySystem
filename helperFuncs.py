@@ -3,6 +3,7 @@ import textHelperFunc
 import time
 import getpass
 import os
+import csv
 
 
 # return -1 if username is less than 6 chars
@@ -15,7 +16,6 @@ def checkUser(username,password):
 		return -1
 	if len(password) < 6 :
 		return -2 
-
 	chars = set("!@#$%^&*?,<>':;+=") 
 	if any((c in chars) for c in username): 
 		return -3 
@@ -24,15 +24,50 @@ def checkUser(username,password):
 	
 	return 1
 
-def createAccount():
+def createAccount(username, password):
 	print "Creating Account..."
-	new_username = raw_input("Enter a Username: ")
-	new_password = raw_input("Enter a Password: ")
-	if checkUser(new_username, new_password) > 0:
+	if checkUser(username, password) > 0:
+		with open('./.securesys/fileSystem.csv', 'w') as csvfile:
+			fieldnames = ['first_name', 'last_name']
+			writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+			writer.writeheader()
+			writer.writerow({'first_name': 'Baked', 'last_name': 'Beans'})
+			writer.writerow({'first_name': 'Lovely', 'last_name': 'Spam'})
+			writer.writerow({'first_name': 'Wonderful', 'last_name': 'Spam'})
 		print "Account Creation Successful"
 	else:
 		print "Unable to Create Account"
 		exit()
+
+def loginMain():
+	input_username = raw_input("Username: ")
+	input_password = getpass.getpass("Password: ")
+	csvFile = open('./.secureSys/fileSystem.csv')
+	reader = csv.DictReader(csvFile)
+	for row in reader:
+		if row["Username"] == input_username:
+			if row["Password"] == input_password:
+				print "Login Successful"
+				return 1
+			print "Invalid Password"
+			return -1
+	print "User not Found"
+	return -2
+
+def mainMenu():
+	print
+	print "---------Main Menu---------"
+	print "1 - Send a Text"
+	print "2 - Send an Email"
+	print "3 - Send a Text and Email"
+	print "0 - No Notifications"
+	textOrEmail = raw_input("Enter option: ")
+	simMovementInput = raw_input("Simulate Movement? (y/n) ")
+	if simMovementInput == 'y':
+		if simMovement(textOrEmail) == 1:
+			print "Success"
+		else:
+			print "Failure"
 
 def simMovement(notification):
 	if int(notification) == 0:
@@ -75,7 +110,9 @@ def simMovement(notification):
 	return 1
 
 
-
+#
+# Not currently used, using a bash script instead to initialize the System
+#
 def createFilesystem(): 
 	print "Creating FileSystem..."
 	path = os.getcwd() + "/.securesys"
@@ -91,14 +128,26 @@ def createFilesystem():
 	print "Opened File System File - 'filesystem.txt'..."
 	os.chdir("..")
 	return newfile
-
+#
+# Not currently used, using a bash script instead to initialize the System
+#
 def checkFilesystem():
-	path = os.getcwd() + "/.securesys/filesystem.txt"
-	return not (os.stat(path).st_size == 0)
+	print "--Checking FileSystem.......................",
+	try:
+		path = os.getcwd() + "/.securesys/fileSystem.csv"
+		return not (os.stat(path).st_size == 0)
+	except OSError:
+		return False
 
-
-
-
+def performInitChecks():
+	print "Performing Init Checks..."
+	if not checkFilesystem():
+		print "Failed"
+		print "Failed Init Checks"
+		return False
+	print "Passed"
+	print "Init Checks Complete"
+	return True
 
 
 
